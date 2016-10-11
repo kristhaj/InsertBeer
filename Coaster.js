@@ -41,10 +41,11 @@ SensorTag.discoverByAddress('b0:b4:b48:c9:74:80', function(tag) {
 	}
 
 	function listenForTempReading() {
-		tag.on('barometricPressureChange', function(pressure) {
+		var fs = require('fs');
+		while(true) {
+			tag.on('barometricPressureChange', function(pressure) {
 			console.log('\tPressure = %d', pressure.toFixed(1));
 			//writes beer state to file for tweet
-			var fs = require('fs');
 			
 			// TODO tweet for more beer
 			if (pressure < 2 || pressure) > 1 { //pressure with empty beer
@@ -57,6 +58,8 @@ SensorTag.discoverByAddress('b0:b4:b48:c9:74:80', function(tag) {
 				});
 			} 
 		});
+		}
+		
 	}
 
 
