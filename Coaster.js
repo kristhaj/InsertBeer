@@ -11,6 +11,7 @@ SensorTag.discoverByAddress('b0:b4:b48:c9:74:80', function(tag) {
 	function connectAndSetUpMe() {
 		console.log('connectAndSetUp');
 		tag.connectAndSetUp(enableIrTempMe);
+		tag.connectAndSetUpMe(enableBarPresMe);
 
 	}
 
@@ -21,7 +22,7 @@ SensorTag.discoverByAddress('b0:b4:b48:c9:74:80', function(tag) {
 
 	function notifyMe() {
 		tag.notifyIrTemperature(listenForTempReading);
-		tag.notifySimpleKey(listenforButton);
+		tag.notidyBarometricPressure(listenForBarPresReading);
 	}
 
 	function listenForTempReading() {
@@ -33,6 +34,22 @@ SensorTag.discoverByAddress('b0:b4:b48:c9:74:80', function(tag) {
 		});
 
 	}
+
+	function enableBarPresMe() {
+		console.log('enableBarometricPressureSensor');
+		tag.enableBarometricPressure(notifyMe);
+	}
+
+	function listenForTempReading() {
+		tag.on('barometricPressureChange', function(pressure) {
+			// TODO messure weight of beer
+			console.log('\tPressure = %d', pressure.toFixed(1));
+		});
+	}
+
+
+
+
 
 
 
