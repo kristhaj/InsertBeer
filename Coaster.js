@@ -27,10 +27,14 @@ SensorTag.discoverByAddress('b0:b4:b48:c9:74:80', function(tag) {
 	function listenForTempReading() {
 		tag.on('irTemperatureChange', function(objectTemp, ambientTemp) {
 			// TODO tweet for more beer
+			console.log('\tObject Temp = %d deg. C', objectTemp.toFixed(1));
+			console.log('\tAmbient Temp = %d deg. C', ambientTemp.toFixed(1));
 
 		});
 
 	}
+
+
 
 
 	connectAndSetUpMe();
