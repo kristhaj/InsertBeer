@@ -22,12 +22,12 @@ SensorTag.discoverByAddress('b0:b4:b48:c9:74:80', function(tag) {
 
 	function notifyMe() {
 		tag.notifyIrTemperature(listenForTempReading);
-		tag.notidyBarometricPressure(listenForBarPresReading);
+		tag.notifyBarometricPressure(listenForBarPresReading);
 	}
 
 	function listenForTempReading() {
 		tag.on('irTemperatureChange', function(objectTemp, ambientTemp) {
-			// TODO tweet for more beer
+			// TODO notify slow drinking
 			console.log('\tObject Temp = %d deg. C', objectTemp.toFixed(1));
 			console.log('\tAmbient Temp = %d deg. C', ambientTemp.toFixed(1));
 
@@ -42,8 +42,20 @@ SensorTag.discoverByAddress('b0:b4:b48:c9:74:80', function(tag) {
 
 	function listenForTempReading() {
 		tag.on('barometricPressureChange', function(pressure) {
-			// TODO messure weight of beer
 			console.log('\tPressure = %d', pressure.toFixed(1));
+			//writes beer state to file for tweet
+			var fs = require('fs');
+			
+			// TODO tweet for more beer
+			if (pressure < 2 || pressure) > 1 { //pressure with empty beer
+				fs.writeFile('/beerState', "#InsertBeerHere er tom for pils, og vil gjerne ha fler bonger!", function(err) {
+					if(err) {
+						return conole.log(err);
+					}
+
+					console.log("File saved!");
+				});
+			} 
 		});
 	}
 
