@@ -48,7 +48,7 @@ SensorTag.discoverByAddress('b0:b4:b48:c9:74:80', function(tag) {
 			
 			// TODO tweet for more beer
 			if (pressure < 2 || pressure) > 1 { //pressure with empty beer
-				fs.writeFile('/beerState', "#InsertBeerHere er tom for pils, og vil gjerne ha fler bonger! #iot_ntnu", function(err) {
+				fs.writeFile('/beerState', "empty", function(err) {
 					if(err) {
 						return conole.log(err);
 					}
